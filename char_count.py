@@ -8,7 +8,9 @@ import os
 directory = "/path/to/directory"
 
 # Create a new file of the character count
-output_file = open("char_count.txt", "w")
+# output_file = open("char_count.txt", "w")
+
+file_too_large = False
 
 # Go through each file and count the characters
 for filename in os.listdir(directory):
@@ -21,6 +23,12 @@ for filename in os.listdir(directory):
             num_chars = len(contents)
             # Only write if more than 37,000 characters
             if num_chars > 37000:
-                output_file.write(f"{filename}: {num_chars}\n")
+                file_too_large = True
+                break
 
-output_file.close()
+if file_too_large:
+    print("Files are still too large")
+else:
+    print("All files are less than 37,000 characters")
+
+# output_file.close()
